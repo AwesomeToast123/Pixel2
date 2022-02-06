@@ -51,7 +51,6 @@ function RootNavigator() {
         headerShown: false
       }}
     >
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="SignUpScreen" component={SignupScreen} />
