@@ -58,12 +58,17 @@ function SigninScreen() {
                     style={styles.textInput}
                     value={userName}
                     onChangeText={setuserName}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    secureTextEntry={true}
                 />
                 <Text style={styles.textForm}>Password</Text>
                 <TextInput
                     style={styles.textInput}
                     value={password}
                     onChangeText={setPassword}
+                    autoCorrect={false}
+                    secureTextEntry={true}
                 />
             </View>
             <View>

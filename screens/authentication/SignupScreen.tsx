@@ -73,18 +73,26 @@ const SignupScreen = () => {
                     style={styles.textInput}
                     value={email}
                     onChangeText={setEmail}
+                    autoCapitalize="none"
+                    autoCorrect={false}
                 />
                 <Text>Password</Text>
                 <TextInput
                     style={styles.textInput}
                     value={password}
                     onChangeText={setPassword}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    secureTextEntry={true}
                 />
                 <Text>Confirm Password</Text>
                 <TextInput
                     style={styles.textInput}
                     value={confPassword}
                     onChangeText={setConfpassword}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    secureTextEntry={true}
                 />
             </View>
             <View>
