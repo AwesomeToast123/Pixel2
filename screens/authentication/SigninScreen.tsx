@@ -5,17 +5,46 @@ import SigninButton from '../../components/signIn/index';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types';
 import SignupScreen from './SignupScreen';
+import { gql, useMutation } from '@apollo/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 function SigninScreen() {
+
+    const SIGN_IN_NOTATION = gql`
+        mutation SignupMutation( $email: String!, $password: String!){
+         signUp(input: {email: $email, password: $password}){
+                token
+                  user{
+                    id
+                    name
+                    email
+                  }
+             }
+        }
+    `
+
+    const [signIn, { data, error, loading }] = useMutation(SIGN_IN_NOTATION);
+
+    const [userName, setuserName] = useState('');
+    const [password, setPassword] = useState('');
 
     const startValue = new Animated.Value(1);
     const endValue = 1.5;
 
     const Stack = useNavigation();
 
+    if (data) {
+        //if credentials are correct then redirect to home
+        AsyncStorage.setItem('token', data.signIn.token)
+            .then(() => {
+                Stack.navigate('HomeScreen')
+            })
+    }
 
-    const [userName, setuserName] = useState('');
-    const [password, setPassword] = useState('');
+    const onSubmit = () => {
+        signIn({ variables: { userName, password } })
+    }
 
     useEffect(() => {
         Animated.loop(
@@ -81,7 +110,7 @@ function SigninScreen() {
                     style={styles.SignupButton}
                     onPress={() => Stack.navigate('SignUpScreen')}
                 >
-                    Signup
+                    Signin
                 </Pressable>
             </View>
         </View>
@@ -152,4 +181,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
     }
 })
+
+
 

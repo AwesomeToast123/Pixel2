@@ -2,9 +2,9 @@ import React, { Component, useEffect, useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native'
 import { gql, useMutation } from '@apollo/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignupScreen = () => {
-
     const SIGNUP_MUTATION = gql`
         mutation SignupMutation( $email: String!, $password: String!){
          signUp(input: {email: $email, password: $password}){
@@ -29,6 +29,8 @@ const SignupScreen = () => {
 
     const [signUp, { data, error, loading }] = useMutation(SIGNUP_MUTATION);
 
+
+
     useEffect(() => {
         Animated.loop(
             Animated.spring(startValue, {
@@ -46,6 +48,13 @@ const SignupScreen = () => {
         transform: [
             { translateY: startValue },
         ]
+    }
+
+    if (data) {
+        AsyncStorage.setItem('token', data.signUp.token)
+            .then(() => {
+                Stack.navigate('HomeScreen')
+            })
     }
 
     const onSubmit = () => {
