@@ -60,7 +60,6 @@ function SigninScreen() {
                     onChangeText={setuserName}
                     autoCapitalize="none"
                     autoCorrect={false}
-                    secureTextEntry={true}
                 />
                 <Text style={styles.textForm}>Password</Text>
                 <TextInput
