@@ -29,8 +29,6 @@ const SignupScreen = () => {
 
     const [signUp, { data, error, loading }] = useMutation(SIGNUP_MUTATION);
 
-
-
     useEffect(() => {
         Animated.loop(
             Animated.spring(startValue, {
